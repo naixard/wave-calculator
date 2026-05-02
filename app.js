@@ -113,14 +113,23 @@ let xAxisMode     = 'omega';
 
 function renderParamsUI(key) {
   const container = document.getElementById('spectrum-params');
+
+  // Preserve whatever values are currently shown
+  const saved = {};
+  container.querySelectorAll('input[id^="param-"]').forEach(el => {
+    saved[el.id] = el.value;
+  });
+
   container.innerHTML = '';
   SPECTRA[key].params.forEach(p => {
-    const group = document.createElement('div');
+    const savedVal = saved[`param-${p.id}`];
+    const value    = savedVal !== undefined ? savedVal : p.default;
+    const group    = document.createElement('div');
     group.className = 'form-group';
     group.innerHTML = `
       <label for="param-${p.id}">${p.label}</label>
       <input type="number" id="param-${p.id}"
-             value="${p.default}" min="${p.min}" step="${p.step}">
+             value="${value}" min="${p.min}" step="${p.step}">
     `;
     container.appendChild(group);
   });
