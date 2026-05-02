@@ -22,7 +22,7 @@ Two-parameter ITTC spectrum for fully-developed, open-ocean sea states.
 
 **Inputs:** significant wave height H₁/₃ (m), mean wave period T₁ (s)
 
-**Period relations:** T₁ = 1.086 T₂ = 1.296 T₀
+**Period relations:** T₁ = 1.086 T₂, T₀ = 1.408 T₂
 
 ### JONSWAP (γ = 3.3)
 Two-parameter ITTC spectrum for fetch-limited (developing) sea states, e.g. the North Sea.
