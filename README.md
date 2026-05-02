@@ -8,7 +8,7 @@ A static web application for generating, visualising, and exporting ocean wave e
 
 ## Features
 
-- **Two standard ITTC spectra** — Modified Pierson-Moskowitz and JONSWAP (γ = 3.3)
+- **Three wave spectra** — Modified Pierson-Moskowitz, JONSWAP (γ = 3.3, ITTC), and JONSWAP (variable γ, DNV-RP-C205)
 - **Interactive plot** with switchable x-axis: angular frequency ω (rad/s), frequency f (Hz), or period T (s)
 - **Period indicators** — vertical lines and a summary table for T₀ (peak), T₁ (mean), and T₂ (zero up-crossing) wave periods
 - **CSV export** of the computed spectrum
@@ -31,9 +31,20 @@ Two-parameter ITTC spectrum for fetch-limited (developing) sea states, e.g. the 
 
 **Period relations:** T₁ = 0.834 T₀ = 1.073 T₂
 
-## Reference
+### JONSWAP (DNV-RP-C205)
+Three-parameter JONSWAP spectrum per DNV-RP-C205 with user-specified peak enhancement factor γ.
+
+**Inputs:** significant wave height H₁/₃ (m), peak wave period T₀ (s), peak enhancement factor γ
+
+**Period relations (valid for 1 ≤ γ < 7):**
+- T₂/T₀ = 0.6673 + 0.05037γ − 0.006230γ² + 0.0003341γ³
+- T₁/T₀ = 0.7303 + 0.04936γ − 0.006556γ² + 0.0003610γ³
+
+## References
 
 Faltinsen, O.M., 1999. *Sea loads on ships and offshore structures*, 1st paperback ed. Cambridge ocean technology series. Cambridge University Press, Cambridge.
+
+DNV-RP-C205, April 2025. *Environmental conditions and loads*. Det Norske Veritas.
 
 ## Usage
 

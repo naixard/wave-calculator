@@ -93,6 +93,63 @@ const SPECTRA = {
       formula: String.raw`\begin{aligned} S\!\left(\omega\right) &= \frac{155\,H_{1/3}^2}{T_1^4\,\omega^5}\exp\!\left(-\frac{944}{T_1^4\,\omega^4}\right)3.3^{Y} \\[4pt] Y &= \exp\!\left(-\left(\frac{0.191\,\omega T_1-1}{\sqrt{2}\,\sigma}\right)^{\!2}\right) \\[4pt] \sigma &= \begin{cases}0.07 & \omega\le\tfrac{5.24}{T_1}\\[2pt]0.09 & \omega>\tfrac{5.24}{T_1}\end{cases} \end{aligned}`,
     },
   },
+
+  'jonswap-dnv': {
+    label: 'JONSWAP (DNV-RP-C205)',
+    params: [
+      {
+        id: 'h13',
+        label: 'Significant wave height H₁⁄₃ (m)',
+        default: 3.0,
+        min: 0.001,
+        step: 0.1,
+        validate: v => v > 0 ? null : 'H₁/₃ must be positive',
+      },
+      {
+        id: 't0',
+        label: 'Peak wave period T₀ (s)',
+        default: 11.990,
+        min: 0.1,
+        step: 0.5,
+        validate: v => v > 0 ? null : 'T₀ must be positive',
+      },
+      {
+        id: 'gamma',
+        label: 'Peak enhancement factor γ',
+        default: 3.3,
+        min: 0.001,
+        step: 0.1,
+        validate: v => v > 0 ? null : 'γ must be positive',
+      },
+    ],
+    compute(omega, { h13, t0, gamma }) {
+      const wp  = (2 * Math.PI) / t0;
+      const Ag  = 0.2 / (0.065 * Math.pow(gamma, 0.803) + 0.135);
+      const h2  = h13 * h13;
+      const wp4 = wp * wp * wp * wp;
+      return omega.map(w => {
+        if (w <= 0) return 0;
+        const sigma = w <= wp ? 0.07 : 0.09;
+        const zeta  = (w - wp) / (sigma * wp);
+        const Y     = Math.exp(-0.5 * zeta * zeta);
+        const Spm   = (5 / 16) * h2 * wp4 * Math.pow(w, -5)
+                      * Math.exp(-1.25 * Math.pow(wp / w, 4));
+        return Ag * Spm * Math.pow(gamma, Y);
+      });
+    },
+    // DNV-RP-C205 §3.5.5.4: valid for 1 ≤ γ < 7; T1 and T2 are NaN outside that range
+    periodIndicators({ t0, gamma }) {
+      if (gamma < 1 || gamma >= 7) return { T0: t0, T1: NaN, T2: NaN };
+      const g  = gamma;
+      const T2 = t0 * (0.6673 + 0.05037 * g - 0.006230 * g ** 2 + 0.0003341 * g ** 3);
+      const T1 = t0 * (0.7303 + 0.04936 * g - 0.006556 * g ** 2 + 0.0003610 * g ** 3);
+      return { T0: t0, T1, T2 };
+    },
+    reference: {
+      citation: 'DNV-RP-C205, April 2025. <em>Environmental conditions and loads</em>. Det Norske Veritas.',
+      formula: String.raw`\begin{aligned} S_J(\omega) &= A_\gamma\,\frac{5}{16}\,H_{1/3}^{2}\,\omega_0^{4}\,\omega^{-5} \exp\!\left(-\frac{5}{4}\left(\frac{\omega_0}{\omega}\right)^{\!4}\right) \gamma^{\exp\!\left(-\frac{(\omega-\omega_0)^2}{2\,\sigma^2\omega_0^2}\right)} \\[6pt] A_\gamma &= \frac{0.2}{0.065\,\gamma^{0.803}+0.135},\quad \omega_0 = \frac{2\pi}{T_0} \\[6pt] \sigma &= \begin{cases}0.07 & \omega\le\omega_0\\0.09 & \omega>\omega_0\end{cases} \end{aligned}`,
+    },
+  },
 };
 
 // ── Period indicator colours ───────────────────────────────────────────────────
@@ -328,14 +385,17 @@ function updatePeriodTable(indicators) {
   ];
 
   el.innerHTML = cards.map(({ symbol, name, T, color }) => {
-    const omega = (2 * Math.PI) / T;
-    const freq  = 1 / T;
+    const validT  = isFinite(T);
+    const valLine = validT
+      ? `<div class="period-card-value">${T.toFixed(3)} s</div>
+        <div class="period-card-sub">${((2 * Math.PI) / T).toFixed(4)} rad/s &nbsp;&middot;&nbsp; ${(1 / T).toFixed(4)} Hz</div>`
+      : `<div class="period-card-value">—</div>
+        <div class="period-card-sub">γ outside valid range [1, 7)</div>`;
     return `
       <div class="period-card" style="border-left-color:${color}">
         <div class="period-card-symbol" style="color:${color}">${symbol}</div>
         <div class="period-card-name">${name}</div>
-        <div class="period-card-value">${T.toFixed(3)} s</div>
-        <div class="period-card-sub">${omega.toFixed(4)} rad/s &nbsp;&middot;&nbsp; ${freq.toFixed(4)} Hz</div>
+        ${valLine}
       </div>
     `;
   }).join('');
