@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wave Spectrum Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body data-theme="dark">
+
+  <header class="site-header">
+    <div class="header-content">
+      <h1>Wave Spectrum Calculator</h1>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle colour theme">&#9788; Light</button>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- LEFT: Inputs -->
+    <section class="panel-inputs" aria-label="Input parameters">
+
+      <div class="form-group">
+        <label for="spectrum-type">Spectrum Type</label>
+        <select id="spectrum-type"></select>
+      </div>
+
+      <div id="spectrum-params">
+        <!-- Populated dynamically by app.js -->
+      </div>
+
+      <fieldset class="freq-config">
+        <legend>Frequency Configuration</legend>
+
+        <div class="form-subgroup">
+          <label for="freq-step">Step size &Delta;&omega; (rad/s)</label>
+          <input type="number" id="freq-step" value="0.01" min="0.001" step="0.005">
+          <span class="freq-count-display" id="freq-count-display"></span>
+        </div>
+
+        <div class="minmax-row">
+          <div class="form-subgroup">
+            <label for="freq-min">&omega;<sub>min</sub> (rad/s)</label>
+            <input type="number" id="freq-min" value="0.1" min="0.001" step="0.05">
+          </div>
+          <div class="form-subgroup">
+            <label for="freq-max">&omega;<sub>max</sub> (rad/s)</label>
+            <input type="number" id="freq-max" value="3.0" min="0.01" step="0.1">
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="action-buttons">
+        <button id="btn-generate" class="btn-primary">Generate Spectrum</button>
+        <button id="btn-export" class="btn-secondary" disabled>Export CSV</button>
+      </div>
+
+      <div id="error-msg" class="error-msg" hidden></div>
+
+    </section>
+
+    <!-- RIGHT: Chart -->
+    <section class="panel-chart" aria-label="Spectrum plot">
+      <div class="chart-controls" id="chart-controls" hidden>
+        <span class="chart-controls-label">X-axis:</span>
+        <label class="radio-label">
+          <input type="radio" name="x-axis-mode" value="omega" checked>
+          &omega; (rad/s)
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="x-axis-mode" value="freq">
+          f (Hz)
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="x-axis-mode" value="period">
+          T (s)
+        </label>
+      </div>
+      <div class="chart-container" id="chart-container" hidden>
+        <canvas id="spectrum-chart"></canvas>
+      </div>
+      <div id="period-table" class="period-cards" hidden></div>
+      <p class="chart-placeholder" id="chart-placeholder">
+        Configure inputs and click <strong>Generate Spectrum</strong> to view the plot.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM: References -->
+  <footer class="references">
+    <div class="references-inner">
+      <h2>References &amp; Formulas</h2>
+      <div id="references-list" class="references-grid">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
