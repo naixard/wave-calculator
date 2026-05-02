@@ -2,7 +2,7 @@
 
 A static web application for generating, visualising, and exporting ocean wave energy spectra. Runs entirely in the browser — no server or build step required.
 
-**[Live demo →](https://YOUR_USERNAME.github.io/wave-calculator)**
+**[Live demo →](https://www.adriankosasih.com/wave-calculator)**
 
 ---
 
