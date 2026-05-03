@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="jg" x1="0" y1="80" x2="0" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4f8ef7" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#4f8ef7" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="pg" x1="0" y1="80" x2="0" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.02"/>
+    </linearGradient>
+    <clipPath id="cc">
+      <rect x="560" y="80" width="595" height="461"/>
+    </clipPath>
+  </defs>
+
+  <!-- Page background -->
+  <rect width="1200" height="630" fill="#0d0f16"/>
+
+  <!-- Chart panel background -->
+  <rect x="490" y="50" width="695" height="555" fill="#161822" rx="12"/>
+
+  <!-- Horizontal grid lines -->
+  <g stroke="#2d3148" stroke-width="1">
+    <line x1="560" y1="463" x2="1155" y2="463"/>
+    <line x1="560" y1="387" x2="1155" y2="387"/>
+    <line x1="560" y1="310" x2="1155" y2="310"/>
+    <line x1="560" y1="233" x2="1155" y2="233"/>
+    <line x1="560" y1="157" x2="1155" y2="157"/>
+  </g>
+
+  <!-- Vertical grid lines -->
+  <g stroke="#2d3148" stroke-width="1">
+    <line x1="659" y1="80" x2="659" y2="540"/>
+    <line x1="758" y1="80" x2="758" y2="540"/>
+    <line x1="857" y1="80" x2="857" y2="540"/>
+    <line x1="956" y1="80" x2="956" y2="540"/>
+    <line x1="1056" y1="80" x2="1056" y2="540"/>
+  </g>
+
+  <!-- Period indicator lines (dashed, behind curves) -->
+  <g stroke-width="1.5" stroke-dasharray="5 4" opacity="0.9">
+    <line x1="689" y1="80" x2="689" y2="540" stroke="#f59e0b"/>
+    <line x1="720" y1="80" x2="720" y2="540" stroke="#34d399"/>
+    <line x1="751" y1="80" x2="751" y2="540" stroke="#f472b6"/>
+  </g>
+
+  <!-- Modified PM fill -->
+  <path clip-path="url(#cc)" fill="url(#pg)"
+    d="M 560 540 L 639 538 L 649 532 L 659 519 L 669 498 L 679 463 L 689 414 L 700 348 L 709 291 L 719 272 L 723 275 L 729 279 L 739 302 L 749 337 L 758 371 L 778 425 L 797 463 L 836 506 L 875 524 L 953 536 L 1155 540 Z"/>
+
+  <!-- JONSWAP fill -->
+  <path clip-path="url(#cc)" fill="url(#jg)"
+    d="M 560 540 L 619 540 L 639 538 L 649 529 L 659 506 L 669 444 L 675 368 L 681 253 L 687 138 L 689 118 L 692 138 L 696 195 L 700 253 L 705 329 L 711 379 L 719 425 L 729 463 L 739 486 L 749 502 L 758 511 L 778 523 L 797 529 L 836 535 L 875 538 L 953 539 L 1155 540 Z"/>
+
+  <!-- Modified PM curve -->
+  <path clip-path="url(#cc)" fill="none" stroke="#06b6d4" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+    d="M 560 540 L 639 538 L 649 532 L 659 519 L 669 498 L 679 463 L 689 414 L 700 348 L 709 291 L 719 272 L 723 275 L 729 279 L 739 302 L 749 337 L 758 371 L 778 425 L 797 463 L 836 506 L 875 524 L 953 536 L 1155 540"/>
+
+  <!-- JONSWAP curve -->
+  <path clip-path="url(#cc)" fill="none" stroke="#4f8ef7" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+    d="M 560 540 L 619 540 L 639 538 L 649 529 L 659 506 L 669 444 L 675 368 L 681 253 L 687 138 L 689 118 L 692 138 L 696 195 L 700 253 L 705 329 L 711 379 L 719 425 L 729 463 L 739 486 L 749 502 L 758 511 L 778 523 L 797 529 L 836 535 L 875 538 L 953 539 L 1155 540"/>
+
+  <!-- Axes -->
+  <line x1="560" y1="80" x2="560" y2="540" stroke="#8b90a8" stroke-width="1"/>
+  <line x1="560" y1="540" x2="1155" y2="540" stroke="#8b90a8" stroke-width="1"/>
+
+  <!-- X-axis ticks and labels -->
+  <g fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle">
+    <line x1="659"  y1="540" x2="659"  y2="547" stroke="#8b90a8" stroke-width="1"/>
+    <text x="659"  y="562">0.5</text>
+    <line x1="758"  y1="540" x2="758"  y2="547" stroke="#8b90a8" stroke-width="1"/>
+    <text x="758"  y="562">1.0</text>
+    <line x1="857"  y1="540" x2="857"  y2="547" stroke="#8b90a8" stroke-width="1"/>
+    <text x="857"  y="562">1.5</text>
+    <line x1="956"  y1="540" x2="956"  y2="547" stroke="#8b90a8" stroke-width="1"/>
+    <text x="956"  y="562">2.0</text>
+    <line x1="1056" y1="540" x2="1056" y2="547" stroke="#8b90a8" stroke-width="1"/>
+    <text x="1056" y="562">2.5</text>
+    <line x1="1155" y1="540" x2="1155" y2="547" stroke="#8b90a8" stroke-width="1"/>
+    <text x="1155" y="562">3.0</text>
+  </g>
+
+  <!-- Y-axis ticks and labels -->
+  <g fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="end">
+    <line x1="560" y1="463" x2="553" y2="463" stroke="#8b90a8" stroke-width="1"/>
+    <text x="548" y="468">2</text>
+    <line x1="560" y1="387" x2="553" y2="387" stroke="#8b90a8" stroke-width="1"/>
+    <text x="548" y="392">4</text>
+    <line x1="560" y1="310" x2="553" y2="310" stroke="#8b90a8" stroke-width="1"/>
+    <text x="548" y="315">6</text>
+    <line x1="560" y1="233" x2="553" y2="233" stroke="#8b90a8" stroke-width="1"/>
+    <text x="548" y="238">8</text>
+    <line x1="560" y1="157" x2="553" y2="157" stroke="#8b90a8" stroke-width="1"/>
+    <text x="548" y="162">10</text>
+  </g>
+
+  <!-- Axis titles -->
+  <text x="857" y="592"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif"
+        font-size="14" font-weight="500" text-anchor="middle">&#x03C9; (rad/s)</text>
+  <text transform="rotate(-90 510 310)" x="510" y="310"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif"
+        font-size="14" font-weight="500" text-anchor="middle" dy="5">S(&#x03C9;) (m&#xB2;&#xB7;s)</text>
+
+  <!-- Period labels above chart -->
+  <text x="689" y="73" fill="#f59e0b"
+        font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" text-anchor="middle">T&#x2080;</text>
+  <text x="720" y="73" fill="#34d399"
+        font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" text-anchor="middle">T&#x2081;</text>
+  <text x="751" y="73" fill="#f472b6"
+        font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" text-anchor="middle">T&#x2082;</text>
+
+  <!-- ── LEFT PANEL ── -->
+
+  <!-- Title -->
+  <text x="55" y="195"
+        fill="#e2e4f0" font-family="system-ui,-apple-system,sans-serif"
+        font-size="50" font-weight="700" letter-spacing="-1.5">Wave Spectrum</text>
+  <text x="55" y="255"
+        fill="#e2e4f0" font-family="system-ui,-apple-system,sans-serif"
+        font-size="50" font-weight="700" letter-spacing="-1.5">Calculator</text>
+
+  <!-- Description -->
+  <text x="55" y="300"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="15">Interactive ocean wave energy spectra</text>
+  <text x="55" y="322"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="15">plotter for naval &amp; offshore engineering</text>
+
+  <!-- Spectrum legend -->
+  <rect x="55" y="364" width="26" height="3" rx="1.5" fill="#4f8ef7"/>
+  <text x="91" y="370"
+        fill="#e2e4f0" font-family="system-ui,-apple-system,sans-serif" font-size="14">JONSWAP</text>
+  <rect x="55" y="393" width="26" height="3" rx="1.5" fill="#06b6d4"/>
+  <text x="91" y="399"
+        fill="#e2e4f0" font-family="system-ui,-apple-system,sans-serif" font-size="14">Modified Pierson-Moskowitz</text>
+
+  <!-- Period legend -->
+  <rect x="55" y="430" width="8" height="16" rx="1" fill="#f59e0b"/>
+  <text x="73" y="442"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="13">T&#x2080;  Peak period</text>
+  <rect x="55" y="454" width="8" height="16" rx="1" fill="#34d399"/>
+  <text x="73" y="466"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="13">T&#x2081;  Mean period</text>
+  <rect x="55" y="478" width="8" height="16" rx="1" fill="#f472b6"/>
+  <text x="73" y="490"
+        fill="#8b90a8" font-family="system-ui,-apple-system,sans-serif" font-size="13">T&#x2082;  Zero-crossing period</text>
+
+  <!-- URL -->
+  <text x="55" y="578"
+        fill="#4f8ef7" font-family="system-ui,-apple-system,sans-serif"
+        font-size="13" font-weight="500">adriankosasih.com/wave-calculator</text>
+</svg>
